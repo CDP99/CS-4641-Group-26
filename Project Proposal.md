@@ -7,8 +7,6 @@ We want to use different technical and fundamental stock metrics to create a reg
 ### Introduction/Background
 
 ### Problem definition
-Inputs? Outputs? Modelling assumption (not a deep learning model, but answer to questions like, Is this an MDP? Is this a classification problem? What assumptions are you making when making this model choice?)? 
-
 *Will focus on fundamental stock analysis inputs (list below) and if the case that we do not find the historical data required to train our model, we will use the quantitative indicators in the quant indicators list (already have historical data on those). 
 
 Fundamental Stock Analysis Inputs:
