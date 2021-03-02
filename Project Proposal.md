@@ -7,6 +7,25 @@ We want to use different technical and fundamental stock metrics to create a reg
 ### Introduction/Background
 
 ### Problem definition
+Inputs? Outputs? Modelling assumption (not a deep learning model, but answer to questions like, Is this an MDP? Is this a classification problem? What assumptions are you making when making this model choice?)? 
+
+*Will focus on fundamental stock analysis inputs (list below) and if the case that we do not find the historical data required to train our model, we will use the quantitative indicators in the quant indicators list (already have historical data on those). 
+
+Fundamental Stock Analysis Inputs:
+5yr Return on Equity growth
+5yr Return on Invested Capital growth
+Difference between Return on Equity and Return on Invested Capital
+Price to Earnings Ratio ?
+5yr Free Cash Flow  growth
+Price to Book Ratio ?
+
+Quantitative Indicators:
+Relative Strength Index (RSI)
+Relative Volume (RVOL)
+Exponential Moving Average (EMA, variable days, 30d, 50d, 253d, etc)
+Short Term Moving Average (SMA, variable days, 30d, 50d, 253d, etc)
+Squeeze Theorem (TTM)
+Moving Average Convergence Divergence Indicator (MACD) 
 
 ### Methods
 
