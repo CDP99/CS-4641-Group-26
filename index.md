@@ -41,10 +41,6 @@ If define problem as classification:
 * Bayesian Classifier
 * Support Vector Machine
 
-### Metrics: 
-Is the measure accurate? (type of loss function, and test metric e.g. k-fold validation, and is it accurate for their problem) 
-
-
 ### Potential results: 
 For a given quarter, we will take all of the features that we decide to use on our model and try to predict the average growth of the stock price over the next three years. To display the accuracy of our model, we will have a chart where the x-axis is time from the date that we pulled the financials to three years after. The y-axis would be the percentage difference from our estimated value.
 
