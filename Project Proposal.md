@@ -2,12 +2,12 @@
 #### Fletcher Wells, Javier Arevalo, Matthew Nilsen, Cedric de Pierrefeu, Shengyuan Huang 
 
 ### Abstract: 
-We want to use different technical and fundamental stock metrics to create a regression model to try and estimate the 1yr, 3yr, and/or 5yr growth of a stock. Typically, people only use technical indicators in their models. However, we feel that using fundamental indicators like RoE, RoIC, etc. can add to the model’s ability to classify growth, since these numbers are found in company’s financial statements and have a substantive meaning to the company’s performance. We expect that we will be able to estimate at least whether a company will grow or shrink in value; we aren’t sure how accurately we will be able to estimate a company’s stock price growth percentage.
+We want to use different technical and fundamental stock metrics to create a regression model to try and estimate the 1yr, 3yr, and/or 5yr growth of a stock. Typically, people only use technical indicators in their models. However, we feel that using fundamental indicators like RoE, RoIC, etc. can add to the model’s ability to classify growth, since these numbers are found in company’s financial statements and have a substantive meaning to the company’s performance (Milosevic). We expect that we will be able to estimate at least whether a company will grow or shrink in value; we aren’t sure how accurately we will be able to estimate a company’s stock price growth percentage.
 
 ### Introduction/Background: 
 Since the late 1980s various world renowned researchers, institutions, hedge funds, and banks have investigated the task of how to use data mining and machine learning to increase profitability in the stock market. This is one of the most research ML areas and various newer research papers have considered novel input to the predictive models such as a company’s relevant tweets (NLP), technical indicators, environmental indicators, among many others. 
 
-The reason why this problem is so important and crucial is because of the numbers game. Even if a model beats the market by a small percentage, given a sufficiently large amount of money this model(s) can become extremely profitable business (IB, HedgeFunds, etc.) Many of the work that has been done previously is not publicly available, because of the highly profitable nature of such models and algorithms. The research papers that are available (mostly on Sentiment Analysis on the stock market).
+The reason why this problem is so important and crucial is because of the numbers game (Nunno). Even if a model beats the market by a small percentage, given a sufficiently large amount of money this model(s) can become extremely profitable business (IB, HedgeFunds, etc.) Many of the work that has been done previously is not publicly available, because of the highly profitable nature of such models and algorithms. The research papers that are available (mostly on Sentiment Analysis on the stock market).
 
 ### Problem definition: 
 Will focus on fundamental stock analysis inputs (list below) and if the case that we do not find the historical data required to train our model, we will use the quantitative indicators in the quant indicators list (already have historical data on those). 
@@ -39,10 +39,12 @@ If define problem as classification:
 * Neural Network Multiclass Classification with y in {bullish, bearish, neutral}
 * Recurrent Neural Network for Sentiment Analysis 
 * Bayesian Classifier
-* Support Vector Machine
+* Support Vector Machine*
+
+\* SVMs work very well with time-series financial data, and will be something that we decide to look into much more deeply if the regression approach does not end up being feasible (Cao et al.)
 
 ### Metrics: 
-Is the measure accurate? (type of loss function, and test metric e.g. k-fold validation, and is it accurate for their problem) 
+As a baseline, we will estimate the growth percentage of all companies using the average gain of the S&P 500, which is around 6%. Then, as we add complexity to our model, we will see if our MSE is reduced. For our actual training and testing, we will use k-fold validation in order to reduce bias and decrease the computation time of our training.
 
 
 ### Potential results: 
@@ -51,6 +53,8 @@ For a given quarter, we will take all of the features that we decide to use on o
 E.g. If we are estimating the growth of Microsoft using data from 1/1/2010, the values on the x-axis would be from 1/1/2010 to 1/1/2013. If we estimated an average growth of 15% over 3 years and the price on 1/1/2011 was 10% less than our estimated value of 15%, the value on the y-axis for that point in time would be -5%. Then, if a month later the stock price has gone up to 16.25% greater than the price at 1/1/2010, the value on the y-axis would be 0% because that price falls perfectly in line with our estimated growth.
 
 If our three-year prediction for a stock is above what the current average growth has been, the plotted line will noticeably stray downward from the centerline of 0%. We can also use this chart to plot multiple stocks at once. Depending on if a majority of the lines end above the baseline, below the baseline, or on the baseline of 0%, we will be able to see if our model is accurately predicting growth.
+
+We expect to see a reduction in error compared to our baseline function, as defined in the metrics section.
 
 ### Conclusion: 
 Our goal for this project will be to determine which modelling strategy is the most appropriate for forecasting stock market changes while using financial temporal data and use it with the objective of constructing a model capable of predicting changes to stock price over the span of three years. 
