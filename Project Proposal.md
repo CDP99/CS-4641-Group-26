@@ -1,5 +1,5 @@
 ## CS 4641 - Predictive Stock Machine Learning Project Proposal
-#### Fletcher Wells, Javier Arevalo, Matthew Nilsen, Cedric de Pierrefeu
+#### Fletcher Wells, Javier Arevalo, Matthew Nilsen, Cedric de Pierrefeu, Shengyuan Huang 
 
 ### Abstract: 
 We want to use different technical and fundamental stock metrics to create a regression model to try and estimate the 1yr, 3yr, and/or 5yr growth of a stock. Typically, people only use technical indicators in their models. However, we feel that using fundamental indicators like RoE, RoIC, etc. can add to the model’s ability to classify growth, since these numbers are found in company’s financial statements and have a substantive meaning to the company’s performance. We expect that we will be able to estimate at least whether a company will grow or shrink in value; we aren’t sure how accurately we will be able to estimate a company’s stock price growth percentage.
@@ -52,13 +52,11 @@ E.g. If we are estimating the growth of Microsoft using data from 1/1/2010, the 
 
 If our three-year prediction for a stock is above what the current average growth has been, the plotted line will noticeably stray downward from the centerline of 0%. We can also use this chart to plot multiple stocks at once. Depending on if a majority of the lines end above the baseline, below the baseline, or on the baseline of 0%, we will be able to see if our model is accurately predicting growth.
 
-<once we decide on our baseline, put what we think that will look like>
-
 ### Conclusion: 
-What have we learned with this project? 
+Our goal for this project will be to determine which modelling strategy is the most appropriate for forecasting stock market changes while using financial temporal data and use it with the objective of constructing a model capable of predicting changes to stock price over the span of three years. 
 
 ### Bibliography: 
-At least three peer reviewed references. You need to properly cite the references on your proposal
+1. Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. arXiv preprint arXiv:1603.00751.
+2. Cao, Lijuan & Tay, Francis. (2001). Financial Forecasting Using Support Vector Machines. Neural Computing and Applications. 10. 184-192. 10.1007/s005210170010.
+3. Nunno, L. (2014). Stock Market Price Prediction Using Linear and Polynomial Regression Models.
 
-
-Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. arXiv preprint arXiv:1603.00751.
