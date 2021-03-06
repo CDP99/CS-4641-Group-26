@@ -1,4 +1,3 @@
-```markdown
 ## CS 4641 - Predictive Stock Machine Learning Project Proposal
 #### Fletcher Wells, Javier Arevalo, Matthew Nilsen, Cedric de Pierrefeu, Shengyuan Huang 
 
@@ -60,4 +59,3 @@ Our goal for this project will be to determine which modelling strategy is the m
 1. Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. arXiv preprint arXiv:1603.00751.
 2. Cao, Lijuan & Tay, Francis. (2001). Financial Forecasting Using Support Vector Machines. Neural Computing and Applications. 10. 184-192. 10.1007/s005210170010.
 3. Nunno, L. (2014). Stock Market Price Prediction Using Linear and Polynomial Regression Models.
-```
