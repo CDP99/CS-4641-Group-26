@@ -8,8 +8,6 @@ class API:
             'apikey': key,
             'period': period,
             'limit': limit,
-            'from': '2015-01-01',
-            'to': '2018-01-01'
         }
         self.alwaysCols = ["symbol", "date"]
 
