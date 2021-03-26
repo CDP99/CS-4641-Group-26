@@ -68,6 +68,7 @@ class API:
         growths = self.getGrowths(ticker)
         values = self.getValues(ticker)
 
-        merge = pd.concat([ratios, growths, values], axis=1)
+        merge = pd.merge(ratios, growths, how='inner', left_on=["date", "symbol"], right_on=["date", "symbol"])
+        merge = pd.merge(merge, values, how='inner', left_on=["date", "symbol"], right_on=["date", "symbol"])
 
         return merge
