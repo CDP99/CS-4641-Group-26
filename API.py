@@ -18,7 +18,12 @@ class API:
 
     def getDataFrame(self, endpoint): 
         r = self.request(endpoint)
-        df = pd.json_normalize(r.json())
+
+        try:
+            df = pd.json_normalize(r.json())
+        except JSONDecodeError:
+            raise Exception("Bad URL or API Key!")
+
         df = df.reindex(index=df.index[::-1])
         return df
 
