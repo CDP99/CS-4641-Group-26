@@ -37,7 +37,7 @@ class API:
         wantedCols = [
             "currentRatio", "quickRatio", "grossProfitMargin", "operatingProfitMargin", "returnOnAssets",
             "returnOnEquity", "returnOnCapitalEmployed", "debtEquityRatio", "priceToBookRatio", "priceToSalesRatio",
-            "priceEarningsRatio", "priceToOperatingCashFlowsRatio" 
+            "priceEarningsRatio", "priceEarningsToGrowthRatio", "priceToOperatingCashFlowsRatio" 
         ]
         df = self.getDataFrame(endpoint)
         df = df[self.alwaysCols + wantedCols]
