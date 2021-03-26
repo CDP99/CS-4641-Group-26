@@ -62,6 +62,12 @@ class API:
         df = self.getDataFrame(endpoint)
         df = df[self.alwaysCols + wantedCols]
         return df
+    
+    def getFinStat(self, ticker, limit):
+        self.params['limit'] = limit
+        self.params['period'] = 'quarter'
+        endpoint = self.base_url + 'api/v3/income-statement/' + ticker
+        return self.getDataFrame(endpoint)
 
     def getSamples(self, ticker):
         ratios = self.getRatios(ticker)
