@@ -78,6 +78,9 @@ If define problem as classification:
 * Bayesian Classifier
 * Support Vector Machine
 
+### Metrics:
+
+
 ### Results: 
 
 
