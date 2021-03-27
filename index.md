@@ -26,7 +26,44 @@ Quantitative Indicators:
 * Exponential Moving Average (EMA, variable days, 30d, 50d, 253d, etc)
 * Short Term Moving Average (SMA, variable days, 30d, 50d, 253d, etc)
 * Squeeze Theorem (TTM)
-* Moving Average Convergence Divergence Indicator (MACD) 
+* Moving Average Convergence Divergence Indicator (MACD)
+
+### Data Collection:
+We collected all of our data from the FinancialModelingPrep API and used the following endpoints:
+* api/v3/enterprise-values/
+* api/v3/income-statement-growth/
+* api/v3/ratios/
+
+We selected data based on our own knowledge of ratios/ numbers used in estimating companies’ values and growths as well as data that had been used in similar studies that we had read. The ratios that we used along with descriptions are as follows:
+
+|Name          |Formula                              |Description|
+|--------------|-------------------------------------|-----------|
+|Current Ratio |Current assets / Current liabilities |Measures ability to pay short term obligations|
+|Quick Ratio  |(Current assets - inventory) / current liabilities  |Measures short-term liquidity |
+|Gross Profit Margin  |(Revenue - Cost of Goods Sold) / Revenue  |Shows how successful a company is in producing profit above costs|
+|Operating Profit Margin  |Operating Income / Revenue  |Shows how efficiently a company is able to generate profit  |
+|Return on Assets  |Net Income / Total Assets  |Shows how profitable a company is relative to its assets|
+|Return on Equity  |Net Income / Shareholder Equity  |Measures business profitability in relation to shareholder equity|
+|Return on Capital Employed  |Earnings Before Interest and Tax / Capital Employed  |Shows how efficiently a company is able to generate profits from its capital|
+|Debt Equity Ratio  |Liabilities / Shareholder Equity  |Shows how leveraged a company is  |
+|Price Book Ratio  |Share Price / (Book Value / Share)  |Shows a company’s stock valuation in relation to the company’s book value  |
+|Price Sales Ratio  |Market Cap / Total Sales  |Measures how much investors are paying per dollar of company sales  |
+|Price Earnings Ratio  |Share Price / (Earnings / Share)  |Shows how high a company is values in relation to its actual earnings  |
+|Price to Earnings Growth Ratio  |(Price / Earnings) / Expected EPS Growth  |Shows how much investors are paying for earnings in relation to expected earnings growth  |
+|Price to Operating Cash Flow Ratio  |Share Price / (Operating Cash Flow / Share)  |Shows how much investors are paying for cash coming into a business before deductions  |
+
+We also used the following values:
+* Revenue Growth
+* Cost of Revenue Growth
+* Gross Profit Growth
+* Gross Profit Ratio Growth
+* Operating Expense Growth
+* Earnings Before Interest, Taxes, Depreciation, and Amortization Growth
+* Operating Income Growth
+* Net Income Growth
+* Earnings Per Share Growth
+* Market Capitalization
+* Enterprise Value
 
 ### Methods: 
 Our first step would be to model the predictive algorithm as a regression problem. Since regression assumes independent input, we need to filter out our feature list first. 
@@ -41,15 +78,11 @@ If define problem as classification:
 * Bayesian Classifier
 * Support Vector Machine
 
-### Potential results: 
-For a given quarter, we will take all of the features that we decide to use on our model and try to predict the average growth of the stock price over the next three years. To display the accuracy of our model, we will have a chart where the x-axis is time from the date that we pulled the financials to three years after. The y-axis would be the percentage difference from our estimated value.
+### Results: 
 
-E.g. If we are estimating the growth of Microsoft using data from 1/1/2010, the values on the x-axis would be from 1/1/2010 to 1/1/2013. If we estimated an average growth of 15% over 3 years and the price on 1/1/2011 was 10% less than our estimated value of 15%, the value on the y-axis for that point in time would be -5%. Then, if a month later the stock price has gone up to 16.25% greater than the price at 1/1/2010, the value on the y-axis would be 0% because that price falls perfectly in line with our estimated growth.
 
-If our three-year prediction for a stock is above what the current average growth has been, the plotted line will noticeably stray downward from the centerline of 0%. We can also use this chart to plot multiple stocks at once. Depending on if a majority of the lines end above the baseline, below the baseline, or on the baseline of 0%, we will be able to see if our model is accurately predicting growth.
+### Discussion:
 
-### Conclusion: 
-Our goal for this project will be to determine which modelling strategy is the most appropriate for forecasting stock market changes while using financial temporal data and use it with the objective of constructing a model capable of predicting changes to stock price over the span of three years. 
 
 ### Bibliography: 
 1. Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. arXiv preprint arXiv:1603.00751.
