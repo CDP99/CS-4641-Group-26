@@ -79,13 +79,14 @@ If define problem as classification:
 * Support Vector Machine
 
 ### Metrics:
-
+We plan to use Root Mean Squared Error as our loss function.
 
 ### Results: 
-
+We have collected data from the past 52 quarters from Apple and have run dimensionality reduction to determine which features are most independent from one another. We will use this information to cull the features we use for training our model. Next, after deciding which features to use, we will try to predict the average growth of the stock price over the next three years. To display the accuracy of our model, we will have a chart where the x-axis is time from the date that we pulled the financials to three years after. The y-axis would be the percentage difference from our estimated value.
+If our three-year prediction for a stock is above what the current average growth has been, the plotted line will noticeably stray downward from the centerline of 0%. We can also use this chart to plot multiple stocks at once. Depending on if a majority of the lines end above the baseline, below the baseline, or on the baseline of 0%, we will be able to see if our model is accurately predicting growth.
 
 ### Discussion:
-
+Our goal for this project is to determine which modelling strategy is the most appropriate for forecasting stock market changes while using financial temporal data and use it with the objective of constructing a model capable of predicting changes to stock price over the span of three years. 
 
 ### Bibliography: 
 1. Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. arXiv preprint arXiv:1603.00751.
