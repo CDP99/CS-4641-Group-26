@@ -9,9 +9,9 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "externalTerminal",
+            "console": "internalConsole",
             "env": {
-                "API_KEY": "21ece4f7d957373b315884b9c6354c19"
+                "API_KEY": "b903b84d1ce1092d3e9fca34e25bf408"
             }
         }
     ]
