@@ -35,7 +35,7 @@ class API:
 
         return df
 
-    def getDataFrame(self, endpoint): 
+    def getDataFrame(self, endpoint):
         df = self.getDataFrameUnordered(endpoint)
 
         if df.empty:
@@ -51,7 +51,7 @@ class API:
         wantedCols = [
             "currentRatio", "quickRatio", "grossProfitMargin", "operatingProfitMargin", "returnOnAssets",
             "returnOnEquity", "returnOnCapitalEmployed", "debtEquityRatio", "priceToBookRatio", "priceToSalesRatio",
-            "priceEarningsRatio", "priceEarningsToGrowthRatio", "priceToOperatingCashFlowsRatio" 
+            "priceEarningsRatio", "priceEarningsToGrowthRatio", "priceToOperatingCashFlowsRatio"
         ]
         df = self.getDataFrame(endpoint)
         df = df[self.alwaysCols + wantedCols]
@@ -76,7 +76,7 @@ class API:
         df = self.getDataFrame(endpoint)
         df = df[self.alwaysCols + wantedCols]
         return df
-    
+
     def getFinStat(self, ticker, limit):
         self.params['limit'] = limit
         self.params['period'] = 'quarter'
@@ -144,6 +144,9 @@ class API:
         return result
 
     def getPriceChange(self, ticker, dates):
+
+        #Currently returns price in dollars instead of percentage
+
         endpoint = self.base_url + 'api/v3/historical-price-full/' + ticker
         self.params['serietype'] = 'line'
         r = self.request(endpoint)
@@ -156,14 +159,29 @@ class API:
         subOneYear = lambda d: (datetime.strptime(d, "%Y-%m-%d") - relativedelta(years=1)).strftime('%Y-%m-%d')
 
         futureDates = [addOneYear(d) for d in dates]
-        priceData = [o for o in r.json()['historical'] if o['date'] in futureDates]
-        
-        endData = {'symbol': [], 'date': [], 'futureDate': [], 'futureClose': []}
 
-        for o in priceData:
+        priceDataPresent = [o for o in r.json()['historical'] if o['date'] in dates]
+
+        priceDataFuture = [o for o in r.json()['historical'] if o['date'] in futureDates]
+
+
+        endData = {'symbol': [], 'date': [], 'futureDate': [], 'futureClose': [], 'percentage': []}
+
+        indexPricePresent = 0
+        for o in priceDataFuture:
+
+            previousYearPrice = priceDataPresent[indexPricePresent]
+
             endData['date'].append(subOneYear(o['date']))
             endData['futureDate'].append(o['date'])
             endData['futureClose'].append(o['close'])
             endData['symbol'].append(ticker)
+
+            percentageChange = (o['close'] - previousYearPrice['close'])/previousYearPrice['close']
+            endData['percentage'].append(percentageChange)
+            print("Percentage")
+            print(percentageChange)
+            print("")
+            indexPricePresent = indexPricePresent + indexPricePresent
 
         return pd.DataFrame(endData)
