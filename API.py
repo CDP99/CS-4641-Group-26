@@ -3,6 +3,7 @@ import pandas as pd
 import random
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import sys
 
 class API:
     def __init__(self, key, period='annual', limit=5):
@@ -137,6 +138,7 @@ class API:
                 priceChange = self.getPriceChange(state, dates)
             except ValueError:
                 # No price data for stock
+                print("Ticker {} didn't have price data".format(state))
                 continue
 
             result = result.append(priceChange)
@@ -161,27 +163,36 @@ class API:
         futureDates = [addOneYear(d) for d in dates]
 
         priceDataPresent = [o for o in r.json()['historical'] if o['date'] in dates]
-
         priceDataFuture = [o for o in r.json()['historical'] if o['date'] in futureDates]
 
+        combinedPriceData = {}
+        for o in (priceDataPresent + priceDataFuture):
+            try:
+                combinedPriceData[o['date']] = o['close']
+            except Exception as e:
+                print("Bad object was:")
+                print(o)
+                print('From:')
+                print(priceDataPresent + priceDataFuture)
+                print(e)
+                continue
 
         endData = {'symbol': [], 'date': [], 'futureDate': [], 'futureClose': [], 'percentage': []}
 
-        indexPricePresent = 0
-        for o in priceDataFuture:
+        for i, date in enumerate(dates):
 
-            previousYearPrice = priceDataPresent[indexPricePresent]
+            futureDate = addOneYear(date)
 
-            endData['date'].append(subOneYear(o['date']))
-            endData['futureDate'].append(o['date'])
-            endData['futureClose'].append(o['close'])
+            if date not in combinedPriceData or futureDate not in combinedPriceData:
+                print('Date {} not found for {}'.format(date, ticker))
+                continue
+
+            endData['date'].append(date)
+            endData['futureDate'].append(futureDate)
+            endData['futureClose'].append(combinedPriceData[futureDate])
             endData['symbol'].append(ticker)
 
-            percentageChange = (o['close'] - previousYearPrice['close'])/previousYearPrice['close']
+            percentageChange = (combinedPriceData[futureDate] - combinedPriceData[date]) / combinedPriceData[date]
             endData['percentage'].append(percentageChange)
-            print("Percentage")
-            print(percentageChange)
-            print("")
-            indexPricePresent = indexPricePresent + indexPricePresent
 
         return pd.DataFrame(endData)
