@@ -5,6 +5,8 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import sys
 
+import time
+
 class API:
     def __init__(self, key, period='annual', limit=5):
         self.base_url = 'https://financialmodelingprep.com/'
@@ -15,18 +17,47 @@ class API:
         }
         self.alwaysCols = ["symbol", "date"]
 
+        # keeps tracks of the time each api call was made (so that we know whether we go over the api call limit)
+        self.apiCalls = []
+
         if limit == None:
             del self.params['limit']
 
+    def overApiCallLimit(self):
+        API_CALL_LIMIT = 299 # call limit per minute
+        calls = self.apiCalls
+        length = len(calls)
+        if length < API_CALL_LIMIT:
+            return False
+
+        lastTimeIndex = length - API_CALL_LIMIT
+        lastTime = calls[lastTimeIndex]
+
+        oneMinuteAgo = datetime.now() - relativedelta(seconds = 65) # datetime.now()
+        # if the last time is more recent than one minute ago
+        return lastTime >= oneMinuteAgo
+
+    def waitForMoreApiCalls(self):
+        if self.overApiCallLimit():
+            print("Waiting for more API calls to be available...")
+            time.sleep(65)
+
+    def getNumApiCalls(self):
+        return len(self.apiCalls)
+
     def request(self, url):
+        print("Making API call request...")
+        self.waitForMoreApiCalls()
         r = requests.get(url, params=self.params)
 
         if r.status_code != 200:
             raise Exception('API did not return a valid response')
+        else:
+            self.apiCalls.append(datetime.now())
 
         return r
 
-    def getDataFrameUnordered(self, endpoint):
+    def getDataFrameUnordered(self, endpoint): # makes api calls (helper method)
         r = self.request(endpoint)
 
         try:
@@ -36,7 +67,7 @@ class API:
 
         return df
 
-    def getDataFrame(self, endpoint):
+    def getDataFrame(self, endpoint): # makes api calls (helper method)
         df = self.getDataFrameUnordered(endpoint)
 
         if df.empty:
@@ -58,7 +89,7 @@ class API:
         df = df[self.alwaysCols + wantedCols]
         return df
 
-    def getGrowths(self, ticker):
+    def getGrowths(self, ticker): # makes api call
         endpoint = self.base_url + 'api/v3/income-statement-growth/' + ticker
         wantedCols = [
             "growthRevenue", "growthCostOfRevenue", "growthGrossProfit", "growthGrossProfitRatio",
@@ -69,7 +100,7 @@ class API:
         df = df[self.alwaysCols + wantedCols]
         return df
 
-    def getValues(self, ticker):
+    def getValues(self, ticker): # makes API call
         endpoint = self.base_url + 'api/v3/enterprise-values/' + ticker
         wantedCols = [
             "marketCapitalization", "enterpriseValue"
@@ -78,13 +109,13 @@ class API:
         df = df[self.alwaysCols + wantedCols]
         return df
 
-    def getFinStat(self, ticker, limit):
+    def getFinStat(self, ticker, limit): # makes API call
         self.params['limit'] = limit
         self.params['period'] = 'quarter'
         endpoint = self.base_url + 'api/v3/income-statement/' + ticker
         return self.getDataFrame(endpoint)
 
-    def getSamples(self, ticker):
+    def getSamples(self, ticker): # makes API calls
         ratios = self.getRatios(ticker)
         growths = self.getGrowths(ticker)
         values = self.getValues(ticker)
@@ -94,14 +125,14 @@ class API:
 
         return merge
 
-    def getRandTickers(self, num):
+    def getRandTickers(self, num): # makes api calls
         endpoint = self.base_url + 'api/v3/available-traded/list'
         tickers = pd.DataFrame(self.request(endpoint).json())
         rowIdx = random.sample(range(0, len(tickers)), num)
 
         return list(tickers.iloc[rowIdx]['symbol'])
 
-    def getSamplesFromTickers(self, tickers, samplesPerTicker=5, maxTickers=10):
+    def getSamplesFromTickers(self, tickers, samplesPerTicker=5, maxTickers=10): # makes API calls
         '''
         tickers: list Creates dataframe of samples from list of tickers
         samplesPerTicker: int Number of rows of data to get per ticker
