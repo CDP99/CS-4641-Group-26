@@ -137,6 +137,8 @@ class API:
         tickers: list Creates dataframe of samples from list of tickers
         samplesPerTicker: int Number of rows of data to get per ticker
         '''
+        print("\nGetting X data...")
+
         result = pd.DataFrame()
         i = 0
 
@@ -151,6 +153,7 @@ class API:
                 rowIdx = random.sample(range(0, len(df)), samplesPerTicker)
             except ValueError:
                 # Ticker didn't have enough data
+                print("Ticker didn't have enough data.")
                 continue
 
             samples = df.iloc[rowIdx]
@@ -160,6 +163,8 @@ class API:
         return result
 
     def getYFromDF(self, X):
+        print("\nGetting Y data...")
+
         groups = X.groupby(['symbol'])
         result = pd.DataFrame()
 
@@ -167,6 +172,7 @@ class API:
             dates = list(frame['date'])
             try:
                 priceChange = self.getPriceChange(state, dates)
+                print(priceChange.shape)
             except ValueError:
                 # No price data for stock
                 print("Ticker {} didn't have price data".format(state))
@@ -176,9 +182,8 @@ class API:
 
         return result
 
-    def getPriceChange(self, ticker, dates):
-
-        #Currently returns price in dollars instead of percentage
+    def getPriceChange(self, ticker, dates): # makes api call
+        # Currently returns price in dollars instead of percentage
 
         endpoint = self.base_url + 'api/v3/historical-price-full/' + ticker
         self.params['serietype'] = 'line'
@@ -217,6 +222,8 @@ class API:
             if date not in combinedPriceData or futureDate not in combinedPriceData:
                 print('Date {} not found for {}'.format(date, ticker))
                 continue
+            else:
+                print('Date found for {}'.format(ticker))
 
             endData['date'].append(date)
             endData['futureDate'].append(futureDate)
