@@ -79,7 +79,7 @@ If define problem as classification:
 * Support Vector Machine
 
 ### Metrics:
-We plan to use Root Mean Squared Error as our loss function.
+We used Root Mean Squared Error as our loss function.
 
 ### Results: 
 We have collected data from the past 52 quarters from Apple and have run dimensionality reduction to determine which features are most independent from one another. We will use this information to cull the features we use for training our model. Next, after deciding which features to use, we will try to predict the average growth of the stock price over the next three years. To display the accuracy of our model, we will have a chart where the x-axis is time from the date that we pulled the financials to three years after. The y-axis would be the percentage difference from our estimated value.
