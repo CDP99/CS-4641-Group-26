@@ -57,7 +57,7 @@ class NeuralNetRegressionModel():
         plt.show()"""
         print(title)
         print("MSEs: {}".format(results['mse']))
-        print("RMSEs: {}".format(results['rmse']))
+        # print("RMSEs: {}".format(results['rmse']))
         print()
 
 
@@ -79,7 +79,7 @@ class NeuralNetClassificationModel():
         Y_clf_baseline = merged.apply(lambda row: NeuralNetClassificationModel.classifyGrowth(baselinePercentage), axis=1)
         return Y_clf_baseline
 
-    def classifyGrowth(percentage):
+    """def classifyGrowth(percentage):
         growthClassification = 0
 
         if percentage < 0:
@@ -95,6 +95,30 @@ class NeuralNetClassificationModel():
 
         if growthClassification == -1:
             percentage = 0.0
+        # elif growthClassification == 0:
+        #     percentage = 0
+        # elif growthClassification == 1:
+        # pass
+
+        return percentage"""
+
+    def classifyGrowth(percentage):
+        baselinePercentage = .06
+        growthClassification = 1
+
+        if percentage < baselinePercentage:
+            growthClassification = -1
+        elif percentage >= baselinePercentage:
+            growthClassification = 1
+
+        return growthClassification
+
+    def declassifyGrowth(growthClassification):
+        baselinePercentage = .06
+        percentage = baselinePercentage
+
+        if growthClassification == -1:
+            percentage = baselinePercentage - .01
         # elif growthClassification == 0:
         #     percentage = 0
         # elif growthClassification == 1:
@@ -168,7 +192,8 @@ class NeuralNetClassificationModel():
         # alpha is the regularization constant
         grid_search = {'learning_rate_init': [0.05],
                        'epsilon': [1e-08],
-                       'hidden_layer_sizes': [(20, 20), (20,), (100,), (20, 5), (5, 20), (100, 20, 5)],
+                       # 'hidden_layer_sizes': [(20, 20), (20,), (100,), (20, 5), (5, 20), (100, 20, 5)],
+                       'hidden_layer_sizes': [(20, 20), (20,), (100,), (20, 5), (5, 20)],
                        'alpha': 10.0 ** -np.arange(1, 7) } # .0001 is default
                        # 'alpha': [1e-05] }
 
@@ -215,12 +240,12 @@ class NeuralNetClassificationModel():
         return predictedGrowthPercentages
 
     def plotResults(results, title):
-        plt.title(title)
+        """plt.title(title)
         plt.plot(results['x'], results['mse'], label = "MSE")
         plt.plot(results['x'], results['rmse'], label = "RMSE")
         plt.legend()
-        plt.show()
+        plt.show()"""
         print(title)
         print("MSEs: {}".format(results['mse']))
-        print("RMSEs: {}".format(results['rmse']))
+        # print("RMSEs: {}".format(results['rmse']))
         print()

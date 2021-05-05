@@ -138,6 +138,7 @@ class API:
         samplesPerTicker: int Number of rows of data to get per ticker
         '''
         print("\nGetting X data...")
+        minSamplesPerTicker = 5
 
         result = pd.DataFrame()
         i = 0
@@ -150,7 +151,13 @@ class API:
                 oneYearAgo = (datetime.today() - relativedelta(years=1, months=6)).strftime('%Y-%m-%d')
                 df = self.getSamples(t)
                 df = df[df['date'] < oneYearAgo]
-                rowIdx = random.sample(range(0, len(df)), samplesPerTicker)
+                # cap the number of samples to be at most length of the dataframe...
+                cappedSamplesPerTicker = samplesPerTicker
+                if len(df) < samplesPerTicker and len(df) >= minSamplesPerTicker:
+                    cappedSamplesPerTicker = len(df)
+
+                # rowIdx = random.sample(range(0, len(df)), samplesPerTicker)
+                rowIdx = random.sample(range(0, len(df)), cappedSamplesPerTicker)
             except ValueError:
                 # Ticker didn't have enough data
                 print("Ticker didn't have enough data.")
