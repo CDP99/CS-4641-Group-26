@@ -158,8 +158,9 @@ class API:
 
                 # rowIdx = random.sample(range(0, len(df)), samplesPerTicker)
                 rowIdx = random.sample(range(0, len(df)), cappedSamplesPerTicker)
-            except ValueError:
+            except ValueError as e:
                 # Ticker didn't have enough data
+                print(e)
                 print("Ticker didn't have enough data.")
                 continue
 
