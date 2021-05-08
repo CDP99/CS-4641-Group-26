@@ -786,8 +786,7 @@ After completing all of the above steps, we ran several trials while varying the
 
 # Metrics:
 
-
-    As a baseline, we estimated the growth percentage of all companies using the average gain of the S&P 500,  which is around 6%. We took a similar approach for the classification baseline, where we estimated the growth of all companies to be greater than or equal to 6%. Then, as we added complexity to our model, we checked to see how our MSE and RMSE reacted.
+As a baseline, we estimated the growth percentage of all companies using the average gain of the S&P 500, which is around 6%. We took a similar approach for the classification baseline, where we estimated the growth of all companies to be greater than or equal to 6%. Then, as we added complexity to our model, we checked to see how our MSE and RMSE reacted.
 
 
 # Results:
