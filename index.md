@@ -173,29 +173,11 @@ To collect our sample data, we used the API to grab a random sample of stock tic
 Before manipulating the data, we graphed the distributions of each feature. Below are a few of the most and least correlated feature distributions.
 
 
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image1.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image1.png "image_tooltip")
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image2.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image2.png "image_tooltip")
 
-
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image3.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image3.png "image_tooltip")
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image4.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image4.png "image_tooltip")
 
@@ -204,16 +186,7 @@ After this, we standardized the data and performed PCA using MLE to reduce the n
 
 Next, we trained two neural net models: one was a regression neural net that predicted a continuous value, the other was a classification neural net that predicted a discrete class. In this case, there were two classes {-1, 1}, where -1 indicated growth that was below the baseline of 6% growth in stock price, and 1 indicated growth that was greater than or equal to the baseline. For both neural net models, we performed a grid search to find the hyperparameter values that yielded the best results. Below are two graphs representing the grid search results of the neural net classification model with and without PCA respectively. The alpha is the regularization constant, and the other learning_rate_init is the initial learning rate of the model.
 
-
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image5.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image5.png "image_tooltip")
-
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image6.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image6.png "image_tooltip")
 
@@ -821,46 +794,18 @@ After completing all of the above steps, we ran several trials while varying the
 
 We found that our model very quickly became overfitted when using polynomial regression. For example, here are the error charts for our model with and without PCA along with the error chart for our baseline. Note: the y-axis is the error and the x-axis is the degree of the polynomial used to transform the features.
 
-
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image7.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image7.png "image_tooltip")
-
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image8.png "image_tooltip")
 
-
-
-
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image9.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image9.png "image_tooltip")
-
-
-<p id="gdcalert10" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image10.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert11">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image10.png "image_tooltip")
 
 
 While you can see that PCA drastically improved our model error, it is still much higher than the baseline which had an average MSE of 0.51, with a range of 0.65 and varied depending on the stocks/samples selected. To gain more insight into how our predicted values compare to the true values, we calculated the mean, standard deviation, minimum, and maximum of a set of predicted values. By doing this, we saw that the mean for the predictions was -49% and the standard deviation was 198%. This was mainly because we had an extremely low minimum of -1175%. Taking a step back, we realized that this isn’t even possible because the max any number can decrease is -100%. As a result, we decided to limit the predictions of our model.
 
-
-
-<p id="gdcalert11" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image11.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert12">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
 ![alt_text](images/image11.png "image_tooltip")
-
-
-<p id="gdcalert12" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image12.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert13">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image12.png "image_tooltip")
 
@@ -870,11 +815,6 @@ We replaced all predictions less than -1 (-100%) with -1 since a company cannot 
 To further analyze why the model error was still significantly higher than the expected, we decided to remove outliers from the data to see if this helped reduce our error. To remove the outliers, we first calculated the z-score of all the features, and defined a threshold for which to classify a data point as an outlier. The z-score used was of value 3.0. The below results show the effect of removing outliers on a sample set of blue chip stocks for which we had all the feature training data available: 
 
 Model results with outliers:
-
-
-
-<p id="gdcalert13" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: inline image link here (to images/image13.jpg). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert14">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
 
 ![alt_text](images/image13.jpg "image_tooltip")
 
