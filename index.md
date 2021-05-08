@@ -817,8 +817,9 @@ Model results with outliers:
 
 ![alt_text](images/image13.jpg "image_tooltip")
 
-
 Model results without outliers:
+
+![alt_text](images/image14.jpg "image_tooltip")
 
 After removing the outliers, the model performed significantly better as evident above. We concluded that the outliers on our training data played a significant role in the overfitting of our model, and in the accuracy decrease previously observed. After removing the outliers, the MSE and RSME values were below 1 and within the range of our baseline model.  This clearly indicates that the reason why our previous results were not as expected was not because our model was incorrectly set up but rather because our data contained a large number of outliers that had a great impact on our linear regression model. 
 
