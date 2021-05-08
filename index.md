@@ -855,4 +855,4 @@ Additionally, our model may tell us to invest in a company that perpetuates unet
 1. Milosevic, N. (2016). Equity forecast: Predicting long term stock price movement using machine learning. _arXiv preprint arXiv:1603.00751_.
 2. Cao, Lijuan & Tay, Francis. (2001). Financial Forecasting Using Support Vector Machines. Neural Computing and Applications. 10. 184-192. 10.1007/s005210170010.
 3. Nunno, L. (2014). Stock Market Price Prediction Using Linear and Polynomial Regression Models.
-4. Wellman, M.P., Rajan, U. Ethical Issues for Autonomous Trading Agents. _Minds & Machines_ **27, **609–624 (2017).[ https://doi.org/10.1007/s11023-017-9419-4](https://doi.org/10.1007/s11023-017-9419-4)
+4. Wellman, M.P., Rajan, U. Ethical Issues for Autonomous Trading Agents. _Minds & Machines_ **27,** 609–624 (2017).[ https://doi.org/10.1007/s11023-017-9419-4](https://doi.org/10.1007/s11023-017-9419-4)
